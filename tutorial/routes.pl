@@ -1,9 +1,18 @@
 use Mojolicious::Lite;
 
+# Assignments:
+#
+#    #1 Change the titles in the html below.
+#
+#    #2 Add a back buton to carpe.html.ep below.
+#
+#       The button can just be an href back to "/".
+#
+
 get '/carpe' => sub {
     my $c = shift;
 
-    $c->render("carpe", now => scalar(localtime(time())));
+    $c->render("carpe");
 };
 
 get '/' => sub {
@@ -17,6 +26,7 @@ app->start;
 __DATA__
 
 @@ index.html.ep
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +46,6 @@ __DATA__
     <title>Carpe Diem</title>
 </head>
 <body>
-    Carpe Diem: <%= $now %>
+    Carpe Diem
 </body>
 </html>

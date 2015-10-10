@@ -37,7 +37,7 @@
     </div>
   </div>
 
-  <form id="joy" action="autosave" method="post">
+  <form id="joy" action="/autosave" method="post">
     <textarea class="hidden" name="code"><%== stash('code') %></textarea>
     <div class="row-fluid">
       <div class="span10 text-right actions">
