@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>      
+<head>      
+  <title>LivePerl - [% c.sample.title() %]</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/codemirror-3.1/lib/codemirror.css">
+  <link rel="stylesheet" href="/codemirror-3.1/doc/docs.css">
+  <link rel="stylesheet" href="/css/editor.css">
+  <link rel="stylesheet" href="/css/tree.css">
+  <script src="/js/jquery-1.9.1.js"></script>
+  <script src="/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/codemirror-3.1/lib/codemirror.js"></script>
+  <script src="/codemirror-3.1/mode/perl/perl.js"></script>
+  <script src="/js/editor.js"></script>
+  <style>
+  #logModal {
+    width: 900px;
+  }
+  </style> 
+</head>
+<body>  
+<div class="container-fluid">
+  <div class="masthead row-fluid">
+    <div class="inner span12">
+      <h3 class="masthead-brand">
+          Live Tutorial - <%== stash('title') %>
+      </h3>
+      <ul class="nav masthead-nav">
+        <!-- li>[% h.link_to('Home', '/') %]</li>
+        <li>[% h.link_to('Tutorials', '/tutorials') %]</li>
+        <li>[% h.link_to('Pearls', 'http://pearls.liveperl.us') %]</li>
+        <li>[% h.link_to('About', '/about') %]</li-->
+      </ul>
+    </div>
+  </div>
+
+  <form id="joy" action="autosave" method="post">
+    <textarea class="hidden" name="code"><%== stash('code') %></textarea>
+    <div class="row-fluid">
+      <div class="span10 text-right actions">
+        &nbsp;
+      </div>
+      <div class="span2 text-right actions">
+        <button id=save class="btn btn-mini" type="submit">Saving</button>
+        <button class="btn btn-mini" id="btnToc">TOC</button>
+        <!-- <input type="file" title="Upload" class="btn-mini"> -->
+        <a class="btn btn-mini" href="<%= stash('doc_url') %>" target="_blank">Help</a>
+      </div>
+    </div>
+
+  <%== stash('content') %>
+
+    <div class="row-fluid">
+      <div class="span6">
+        <div id="code"></div>
+      </div>
+      <div class="span6">
+        <div id="output" data-url="<%= stash('data_url') %>">
+          <noscript><h1 style="color: #df0019;">This Site requires JavaScript, please enable it.</h1></noscript>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-header" style="color: black">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="modalLabel">Modal header</h3>
+  </div>
+  <div class="modal-body" style="color: black">
+            <ul id="tree2">
+                <li><a href="#">Chapter 1</a>
+
+                    <ul>
+                        <li><a href="/">Hello World</a></li>
+                        <li><a href="/Ch01/Routes">Routes</a></li>
+                        <li>Employees
+                            <ul>
+                                <li>Reports
+                                    <ul>
+                                        <li>Report1</li>
+                                        <li>Report2</li>
+                                        <li>Report3</li>
+                                    </ul>
+                                </li>
+                                <li>Employee Maint.</li>
+                            </ul>
+                        </li>
+                        <li>Human Resources</li>
+                    </ul>
+                </li>
+                <li>XRP
+                    <ul>
+                        <li>Company Maintenance</li>
+                        <li>Employees
+                            <ul>
+                                <li>Reports
+                                    <ul>
+                                        <li>Report1</li>
+                                        <li>Report2</li>
+                                        <li>Report3</li>
+                                    </ul>
+                                </li>
+                                <li>Employee Maint.</li>
+                            </ul>
+                        </li>
+                        <li>Human Resources</li>
+                    </ul>
+                </li>
+            </ul>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+	<script type="text/javascript">
+	$.fn.extend({
+    treed: function (o) {
+      
+      var openedClass = 'icon-folder-open';
+      var closedClass = 'icon-folder-close';
+      
+      if (typeof o != 'undefined'){
+        if (typeof o.openedClass != 'undefined'){
+        openedClass = o.openedClass;
+        }
+        if (typeof o.closedClass != 'undefined'){
+        closedClass = o.closedClass;
+        }
+      };
+      
+        //initialize each of the top levels
+        var tree = $(this);
+        tree.addClass("tree");
+        tree.find('li').has("ul").each(function () {
+            var branch = $(this); //li with children ul
+            branch.prepend("<i class='" + closedClass + "'></i>");
+            branch.addClass('branch');
+            branch.on('click', function (e) {
+                if (this == e.target) {
+                    var icon = $(this).children('i:first');
+                    icon.toggleClass(openedClass + " " + closedClass);
+                    $(this).children().children().toggle();
+                }
+            })
+            branch.children().children().toggle();
+        });
+        //fire event from the dynamically added icon
+      tree.find('.branch .indicator').each(function(){
+        $(this).on('click', function () {
+            $(this).closest('li').click();
+        });
+      });
+        //fire event to open branch if the li contains an anchor instead of text
+        tree.find('.branch>a').each(function () {
+            $(this).on('click', function (e) {
+                $(this).closest('li').click();
+                e.preventDefault();
+            });
+        });
+        //fire event to open branch if the li contains a button instead of text
+        tree.find('.branch>button').each(function () {
+            $(this).on('click', function (e) {
+                $(this).closest('li').click();
+                e.preventDefault();
+            });
+        });
+    }
+});
+
+$('#tree2').treed({openedClass:'icon-folder-open', closedClass:'icon-folder-close'});
+	</script>
+</body>
+</html>
