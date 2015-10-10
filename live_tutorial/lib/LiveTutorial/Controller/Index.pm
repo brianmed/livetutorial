@@ -14,6 +14,7 @@ sub slash {
     my $section = $c->section;
 
     $c->stash(code => slurp($c->app->home->rel_file($section->code)));
+    $c->stash(summary => $section->summary);
     $c->stash(content => $section->content);
     $c->stash(title => $section->title);
     $c->stash(doc_url => $section->doc_url);

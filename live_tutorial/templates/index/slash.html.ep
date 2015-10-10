@@ -16,7 +16,7 @@
   <script src="/codemirror-3.1/mode/perl/perl.js"></script>
   <script src="/js/editor.js"></script>
   <style>
-  #logModal {
+  #modalContent {
     width: 900px;
   }
   </style> 
@@ -26,7 +26,7 @@
   <div class="masthead row-fluid">
     <div class="inner span12">
       <h3 class="masthead-brand">
-          Live Tutorial - <%== stash('title') %>
+          Live Tutorial - <a style="color: cornflowerblue; visited: cornflowerblue" id=modalTitle><%= stash('title') %></a>
       </h3>
       <ul class="nav masthead-nav">
         <!-- li>[% h.link_to('Home', '/') %]</li>
@@ -46,12 +46,11 @@
       <div class="span2 text-right actions">
         <button id=save class="btn btn-mini" type="submit">Saving</button>
         <button class="btn btn-mini" id="btnToc">TOC</button>
-        <!-- <input type="file" title="Upload" class="btn-mini"> -->
         <a class="btn btn-mini" href="<%= stash('doc_url') %>" target="_blank">Help</a>
       </div>
     </div>
 
-  <%== stash('content') %>
+    <%== stash('summary') %>
 
     <div class="row-fluid">
       <div class="span6">
@@ -69,49 +68,30 @@
 <div id="modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-header" style="color: black">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="modalLabel">Modal header</h3>
+    <h3 id="modalLabel">Table of Contents</h3>
   </div>
   <div class="modal-body" style="color: black">
-            <ul id="tree2">
+            <ul id="tree">
                 <li><a href="#">Chapter 1</a>
-
                     <ul>
                         <li><a href="/">Hello World</a></li>
                         <li><a href="/Ch01/Routes">Routes</a></li>
-                        <li>Employees
-                            <ul>
-                                <li>Reports
-                                    <ul>
-                                        <li>Report1</li>
-                                        <li>Report2</li>
-                                        <li>Report3</li>
-                                    </ul>
-                                </li>
-                                <li>Employee Maint.</li>
-                            </ul>
-                        </li>
-                        <li>Human Resources</li>
-                    </ul>
-                </li>
-                <li>XRP
-                    <ul>
-                        <li>Company Maintenance</li>
-                        <li>Employees
-                            <ul>
-                                <li>Reports
-                                    <ul>
-                                        <li>Report1</li>
-                                        <li>Report2</li>
-                                        <li>Report3</li>
-                                    </ul>
-                                </li>
-                                <li>Employee Maint.</li>
-                            </ul>
-                        </li>
-                        <li>Human Resources</li>
                     </ul>
                 </li>
             </ul>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<div id="modalContent" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalContent" aria-hidden="true">
+  <div class="modal-header" style="color: black">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="modalContent"><%== stash('title') %></h3>
+  </div>
+  <div class="modal-body" style="color: black">
+        <%== stash('content') %>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -173,7 +153,7 @@
     }
 });
 
-$('#tree2').treed({openedClass:'icon-folder-open', closedClass:'icon-folder-close'});
+$('#tree').treed({openedClass:'icon-folder-open', closedClass:'icon-folder-close'});
 	</script>
 </body>
 </html>

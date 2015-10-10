@@ -52,6 +52,10 @@ $(document).ready(function() {
         $("#modal").modal("show");
     });
 
+    $("#modalTitle").click(function() {
+        $("#modalContent").modal("show");
+    });
+
     editor.setValue($('form [name="code"]').val());
     $('#joy').submit(); // make sure #output reflect the right sample
 });
