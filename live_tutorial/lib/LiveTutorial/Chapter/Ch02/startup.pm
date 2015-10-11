@@ -6,7 +6,7 @@ has doc_url => 'http://mojolicio.us/perldoc/Mojolicious/Guides/Tutorial#Hello-Wo
 has summary => q(
   <div class="row-fluid">
       <div class="span6">
-      <h4>Photo</h4>
+      <h4>Startup</h4>
 
       <p>
       The Chapter 1 focused on Mojolicious::Lite applications; however, in order to
@@ -24,7 +24,7 @@ has code => "../photo/lib/Photo.pm";
 
 has content => q(
       <div id="page_1">
-      <h4>Photo</h4>
+      <h4>Startup</h4>
 
           <p>
           The Chapter 1 focused on Mojolicious::Lite applications; however, in order to
@@ -62,12 +62,58 @@ has content => q(
           When a user agent does a GET /, then Photo::Controller::Index::slash will be called and the
           slash.html.ep file will be served.
           </p>
+
+            <div class="well well-small" style="margin-top: 10px;">
+                sub slash {<br>
+                    my $c = shift;<br>
+                    <br>
+                    my $all = SiteCode::Albums->new(path => $c->app->home->rel_dir("albums"))->all;
+            </div>
+
+          <p>
+          Given that, lets go back and discet Photo::startup one "section" at a time.
+            First, we turn on development logging for when we are running in production mode. This is
+            a convience for early stage production or when debugging something. Simply comment out for
+            Production. Next, we initialize the config data structure with a file.
+          </p>
+
+            <div class="well well-small" style="margin-top: 10px;">
+                $self->log->level("debug");<br>
+                &nbsp;<br>
+                my $site_config = $self->plugin("Config" => {file => $self->home->rel_file('../photo.config')});
+            </div>
+      </div>
+
+      <div id="page_3" style="display:none">
+            <p>
+          This file is just a perl data structure and can be hand edited or programmatically
+          defined. Another option is to use JSCONConfig and a JSON config file. Below is an
+          example config file.
+            </p>
+
+            <div class="well well-small" style="margin-top: 10px;">
+                {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;site_secret => "MOAR COREZ foR all the things!",<br>
+                };
+            </div>
+
+            <p>
+            The next setup phase is to initialize the secret passphrase. Multiple
+              passphrases are supported to allow for phasing out an old passphrase. These
+              passphrases are used for things like signed cookies (which are used in the
+              sessions).
+            </p>
+
+            <div class="well well-small" style="margin-top: 10px;">
+                $self->secrets([$$site_config{site_secret}]);
+            </div>
       </div>
 
     <div class="pagination" style="color: black">
       <ul>
         <li><a onclick="paginate(1); return false;" href="#">1</a></li>
         <li><a onclick="paginate(2); return false;" href="#">2</a></li>
+        <li><a onclick="paginate(3); return false;" href="#">3</a></li>
       </ul>
     </div>      
 
