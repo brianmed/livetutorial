@@ -80,6 +80,11 @@
                         <li><a href="/Ch01/Parameters">Parameters</a></li>
                     </ul>
                 </li>
+                <li><a href="#">Chapter 2</a>
+                    <ul>
+                        <li><a href="/Ch02/startup">Photo App</a></li>
+                    </ul>
+                </li>
             </ul>
   </div>
   <div class="modal-footer">
