@@ -1,4 +1,4 @@
-package LiveTutorial::Chapter::Ch02::startup;
+package LiveTutorial::Chapter::Ch02::Startup;
 
 use Mojo::Base -base;
 
@@ -18,9 +18,9 @@ has summary => q(
   <br>
 );
 
-has title => 'Templates and Stash';
-has data_url => "http://stash.localhost:3000";
-has code => "../tutorial/stash.pl";
+has title => 'Photo';
+has data_url => "http://photo.localhost:3000";
+has code => "../photo/lib/Photo.pm";
 
 has content => q(
       <h4>Photo</h4>

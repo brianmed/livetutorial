@@ -27,7 +27,7 @@ sub save {
 
     my $site_config = $c->site_config;
 
-    my $dir = $$site_config{album_dir};
+    my $dir = $c->app->home->rel_dir("albums");
     my $album_name = $c->param("album_name");
 
     unless ($album_name) {
@@ -72,8 +72,8 @@ sub switch {
         return($c->redirect_to($url));
     }
 
-    my $site_config = $c->site_config;
-    my $all = SiteCode::Albums->new(path => $$site_config{album_dir})->all;
+    my $dir = $c->app->home->rel_dir("albums");
+    my $all = SiteCode::Albums->new(path => $dir)->all;
 
     $c->stash(albums => $all);
 
@@ -119,7 +119,7 @@ sub upload {
 
     eval {
         my $site_config = $c->site_config;
-        my $dir = $$site_config{album_dir};
+        my $dir = $c->app->home->rel_dir("albums");
         my $album_name = $c->session->{album};
         my $album = SiteCode::Album->new(path => "$dir/$album_name", name => $album_name);
 
@@ -136,7 +136,7 @@ sub photo {
     my $c = shift;
 
     my $site_config = $c->site_config;
-    my $dir = $$site_config{album_dir};
+    my $dir = $c->app->home->rel_dir("albums");
     my $album = SiteCode::Album->new(path => "$dir/" . $c->session->{album}, name => $c->session->{album}); # <!-- (*@\label{_photo_session}@*) -->
 
     my $slot = $c->param("slot");
