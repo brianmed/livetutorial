@@ -8,7 +8,6 @@ use SiteCode::Albums;
 sub slash {
     my $c = shift;
 
-    $DB::single = 1;
     my $all = SiteCode::Albums->new(path => $c->app->home->rel_dir("albums"))->all;
 
     if (0 == @{ $all }) { # Create an album if none found
