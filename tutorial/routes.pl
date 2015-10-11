@@ -4,7 +4,9 @@ use Mojolicious::Lite;
 #
 #    #1 Change the titles in the html below.
 #
-#    #2 Add a link to index.html.ep from carpe.html.ep.
+#    #2 Add a back buton to carpe.html.ep below.
+#
+#       The button can just be an href back to "/".
 #
 
 get '/carpe' => sub {

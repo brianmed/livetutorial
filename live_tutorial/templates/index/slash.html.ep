@@ -76,6 +76,8 @@
                     <ul>
                         <li><a href="/">Hello World</a></li>
                         <li><a href="/Ch01/Routes">Routes</a></li>
+                        <li><a href="/Ch01/Stash">Templates and Stash</a></li>
+                        <li><a href="/Ch01/Parameters">Parameters</a></li>
                     </ul>
                 </li>
             </ul>
