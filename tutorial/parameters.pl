@@ -8,6 +8,8 @@ use Mojolicious::Lite;
 get '/' => sub {
     my $c = shift;
 
+    $c->stash(name => $c->param("name")) if $c->param("name");
+
     $c->render("index");
 };
 
@@ -23,7 +25,11 @@ __DATA__
     <title>Hello World</title>
 </head>
 <body>
-    Hello world<br>
-    <a href=/Jewel></a>
+    % if (stash('name')) {
+        Hello <%= stash('name') %><br>
+    % } else {
+        Hello world<br>
+    % }
+    <a href=/?name=Jewel>Click me</a>
 </body>
 </html>
