@@ -109,11 +109,66 @@ has content => q(
             </div>
       </div>
 
+      <div id="page_4" style="display:none">
+            <p>
+            After our secret passphrases we setup the helpers. A helper is a sub that is
+            made available to the controller object and the application object, as well as
+            a function in ep templates. There is one helper defined and then initialized.
+            </p>
+
+            <div class="well well-small" style="margin-top: 10px;">
+                $self->helper(site_config => \&site_config);<br>
+                $self->site_config($site_config);
+            </div>
+
+            <p>
+                After our helper we utilize a plugin that creates a log of all incoming
+                requests (also called an access log).   Please note the use of 
+                <code> $self->home->rel_file(...) </code>.  The rel_file function is very
+                handy when needing a file relative to the application root.
+            </p>
+
+            <div class="well well-small" style="margin-top: 10px;">
+                $self->plugin(AccessLog => {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;log => $self->home->rel_file("log/access.log"), <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;format => '%h %l %u %t "%r" %>s %b %D "%{Referer}i" "%{User-Agent}i"'<br>
+                });
+            </div>
+      </div>
+
+      <div id="page_5" style="display:none">
+            <p>
+                After the AccessLog plugin we setup our routes; an "under" nested route
+                that verifies the session; and route setup itself.
+            </p>
+
+            <div class="well well-small" style="margin-top: 10px;">
+            my $r = $self->routes;<br>
+            <br>
+            my $have_album = $r->under (sub {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;my $self = shift;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;if (!$self->session("album")) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;my $url = $self->url_for('/');<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$self->redirect_to($url);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return undef;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;return 1;<br>
+            });
+            </div>
+
+            <p>
+            </p>
+      </div>
+
     <div class="pagination" style="color: black">
       <ul>
         <li><a onclick="paginate(1); return false;" href="#">1</a></li>
         <li><a onclick="paginate(2); return false;" href="#">2</a></li>
         <li><a onclick="paginate(3); return false;" href="#">3</a></li>
+        <li><a onclick="paginate(4); return false;" href="#">4</a></li>
+        <li><a onclick="paginate(5); return false;" href="#">5</a></li>
       </ul>
     </div>      
 
