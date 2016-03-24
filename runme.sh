@@ -1,4 +1,4 @@
-export PERL5LIB="live_tutorial/lib:photo/lib"
+#!/bin/bash
 
 morbo \
     -w live_tutorial/lib \

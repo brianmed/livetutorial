@@ -20,10 +20,12 @@ sub startup {
     $self->helper(site_config => \&site_config);
     $self->site_config($site_config);
 
-    $self->plugin(AccessLog => {
-        log => $self->home->rel_file("log/access.log"), 
-        format => '%h %l %u %t "%r" %>s %b %D "%{Referer}i" "%{User-Agent}i"'
-    });
+    eval {
+        $self->plugin(AccessLog => {
+            log => $self->home->rel_file("log/access.log"), 
+            format => '%h %l %u %t "%r" %>s %b %D "%{Referer}i" "%{User-Agent}i"'
+        });
+    };
 
     my $r = $self->routes;
 
