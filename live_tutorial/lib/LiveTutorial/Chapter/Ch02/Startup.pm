@@ -129,10 +129,12 @@ has content => q(
             </p>
 
             <div class="well well-small" style="margin-top: 10px;">
-                $self->plugin(AccessLog => {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;log => $self->home->rel_file("log/access.log"), <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;format => '%h %l %u %t "%r" %>s %b %D "%{Referer}i" "%{User-Agent}i"'<br>
-                });
+                eval {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;$self->plugin(AccessLog => {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;log => $self->home->rel_file("log/access.log"), <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format => '%h %l %u %t "%r" %>s %b %D "%{Referer}i" "%{User-Agent}i"'<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                };
             </div>
       </div>
 

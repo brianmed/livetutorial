@@ -27,6 +27,7 @@ sub autosave {
     my $c = shift;
 
     my $code = $c->param("code");
+    $code =~ s#\r\n#\n#g;
 
     my $section = $c->section;
 

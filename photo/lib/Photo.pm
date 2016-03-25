@@ -7,6 +7,10 @@ sub startup {
 
     $self->log->level("debug");
 
+    my $site_config = $self->plugin("Config" => {file => $self->home->rel_file('../photo.config')});
+
+    $self->secrets([$$site_config{site_secret}]);
+
     eval {
         $self->plugin(AccessLog => {
             log => $self->home->rel_file("log/access.log"), 
