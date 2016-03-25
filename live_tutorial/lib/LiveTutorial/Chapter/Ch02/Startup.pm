@@ -19,7 +19,7 @@ has summary => q(
 );
 
 has title => 'Photo';
-has data_url => "http://photo.localhost:3000";
+has data_url => "http://127.0.0.1:3000/photo";
 has code => "../photo/lib/Photo.pm";
 
 has content => q(

@@ -34,7 +34,7 @@ __DATA__
 </head>
 <body>
     Hello world<br>
-    <a href=/carpe>Carpe Diem</a>
+    <a href=/tutorial/routes/carpe>Carpe Diem</a>
 </body>
 </html>
 

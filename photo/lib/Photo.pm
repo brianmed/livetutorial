@@ -2,23 +2,10 @@ package Photo;
 
 use Mojo::Base 'Mojolicious';
 
-sub site_config {
-    state $site_config = pop;
-}
-
 sub startup {
     my $self = shift;
 
     $self->log->level("debug");
-
-    my $site_config = $self->plugin("Config" => {
-        file => $self->home->rel_file('../photo.config')
-    });
-
-    $self->secrets([$$site_config{site_secret}]);
-
-    $self->helper(site_config => \&site_config);
-    $self->site_config($site_config);
 
     eval {
         $self->plugin(AccessLog => {
@@ -52,6 +39,10 @@ sub startup {
         action => 'switch', 
         name => undef
     );
+    $r->post('/album/save')->to(
+        controller => 'Album', 
+        action => 'save'
+    );
 
     $have_album->get('/album/show')->to(
         controller => 'Album', 
@@ -64,10 +55,6 @@ sub startup {
     $have_album->post('/album/upload')->to(
         controller => 'Album', 
         action => 'upload'
-    );
-    $have_album->post('/album/save')->to(
-        controller => 'Album', 
-        action => 'save'
     );
 }
 

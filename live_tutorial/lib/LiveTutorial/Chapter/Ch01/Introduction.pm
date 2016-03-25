@@ -18,7 +18,7 @@ has summary => q(
   <br>
 );
 has title => 'Hello World';
-has data_url => "http://hello_world.localhost:3000";
+has data_url => "http://127.0.0.1:3000/tutorial/hello_world";
 has code => "../tutorial/hello_world.pl";
 
 has content => q(

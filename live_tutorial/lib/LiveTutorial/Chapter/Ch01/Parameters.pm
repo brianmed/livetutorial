@@ -24,7 +24,7 @@ has summary => q(
 );
 
 has title => 'Parameters';
-has data_url => "http://parameters.localhost:3000";
+has data_url => "http://127.0.0.1:3000/tutorial/parameters";
 has code => "../tutorial/parameters.pl";
 
 has content => q(

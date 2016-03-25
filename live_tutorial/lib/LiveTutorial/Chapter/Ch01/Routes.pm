@@ -15,7 +15,7 @@ has summary => q(
 );
 
 has title => 'Routes';
-has data_url => "http://routes.localhost:3000";
+has data_url => "http://127.0.0.1:3000/tutorial/routes";
 has code => "../tutorial/routes.pl";
 
 has content => q(

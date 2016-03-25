@@ -15,7 +15,7 @@ has summary => q(
 );
 
 has title => 'Templates and Stash';
-has data_url => "http://stash.localhost:3000";
+has data_url => "http://127.0.0.1:3000/tutorial/stash";
 has code => "../tutorial/stash.pl";
 
 has content => q(

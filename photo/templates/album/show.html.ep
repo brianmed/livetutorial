@@ -2,9 +2,9 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     
-    <script type='text/javascript' src='/js/jquery-1.8.3.js'></script>
-    <script type='text/javascript' src="/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-combined.no-icons.min.css">
+    <script type='text/javascript' src='/photo/js/jquery-1.8.3.js'></script>
+    <script type='text/javascript' src="/photo/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/photo/css/bootstrap-combined.no-icons.min.css">
       
     <script type='text/javascript'>//<![CDATA[ 
         $(window).load(function(){
@@ -35,7 +35,7 @@
 <div class="row">
 <div class="span12">
 
-<form action="/album/upload" method="post" enctype="multipart/form-data"> <!-- (*@\label{_form_start}@*) -->
+<form action="/photo/album/upload" method="post" enctype="multipart/form-data"> <!-- (*@\label{_form_start}@*) -->
   <fieldset>
     <legend>
         <%= stash('album')->name %> - <!-- (*@\label{_form_moose}@*) -->
@@ -45,11 +45,11 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="/album/create">Create</a></li>
+                <li><a href="/photo/album/create">Create</a></li>
                 <li class="divider"></li>
-                % foreach my $album (@{ stash('albums') }) {  <!-- (*@\label{_form_switch_start}@*) -->
-                  <li><a href="/album/switch/<%= $album->name %>"><%= $album->name %></a></li>
-                % }  <!-- (*@\label{_form_switch_end}@*) -->
+                % foreach my $album (@{ stash('albums') }) {
+                  <li><a href="/photo/album/switch/<%= $album->name %>"><%= $album->name %></a></li>
+                % }
             </ul>
         </div>
     </legend>
@@ -96,7 +96,7 @@
         % my $active = $slot->{idx} ? "" : "active";
 
         <div class="item <%= $active %>">
-            <img src="<%= url_for->path("/album/photo/$slot->{idx}") %>"> <!-- (*@\label{_form_url_for}@*) --> 
+            <img src="<%= url_for->path("/photo/album/photo/$slot->{idx}") %>"> <!-- (*@\label{_form_url_for}@*) --> 
             <div class="carousel-caption">
                  <h4><%= $slot->{label} %></h4>
 

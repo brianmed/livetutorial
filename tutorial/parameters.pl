@@ -30,6 +30,6 @@ __DATA__
     % } else {
         Hello world<br>
     % }
-    <a href=/?name=Jewel>Click me</a>
+    <a href=?name=Jewel>Click me</a>
 </body>
 </html>
