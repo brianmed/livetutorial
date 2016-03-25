@@ -10,7 +10,7 @@ has summary => q(
         technologies. We will be learning <a style="color: CornflowerBlue" href="http://mojolicio.us">Mojolicious</a> a
         "next generation web framework for the Perl Programming language".</p>
 
-        <p>Please complete the questions below.</p>
+        <p>There are questions below in the content.  Please feel free to have some fun with them.</p>
 
         <p>The code should autosave and reload.</p>
       </div>
